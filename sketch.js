@@ -189,7 +189,7 @@ let pressure = 0;
         //console.log("time before mapping, "+time);
 
         //get the angle and mapped windspeed
-        finalAngle = map(time,0,24,2*PI,4*PI) - (3*PI)/2;
+        finalAngle = map(time,0,24,2*PI,4*PI) - (3.2*PI)/2;
         finalWind = weather[0].current.wind_speed;
         finalWind = map(finalWind,min(windspeed),max(windspeed),0.1,5);
         temp = (weather[0].current.temp * (9/5) - 459.67);
@@ -224,12 +224,11 @@ let pressure = 0;
   //--------------SUN-------------------//
   //------------------------------------//
   let theSun;
-  //let finalAngle;
 
   function Sun() {
     this.x = null;
     this.y = null;
-    this.angle = 0;
+    this.angle = PI / 12;
     this.r = 100;
     this.speed = 0.01
     this.a = null;
