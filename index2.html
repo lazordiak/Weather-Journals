@@ -101,7 +101,7 @@
 </nav>
 
 <body>
-  <script src="sketch.js"></script>
+  <script src="sketch2.js"></script>
   <section id="main" class="section">
 
     <div class="container">
@@ -124,20 +124,20 @@
           <p id="time">
           </p>
         -->
-          <form id="gen-form">
+          <form name="submit-to-google-sheet" id="gen-form">
             <div class="field">
               <label class="label">Text Prompt</label>
               <div class="control">
-                <textarea id="prefix" class="textarea" type="text" placeholder="The weather is..." rows="2"></textarea>
+                <textarea id="prefix" name="Responses" class="textarea" type="text" placeholder="The weather is..." rows="5"></textarea>
               </div>
-              <p class="help">Starts the generated text with the specified text. <em>(Optional: max 500 characters)</em></p>
+              <p class="help">Tell us a reflection on how the current weather makes you feel. <em>(~50-100 words is best)</em></p>
             </div>
             <div class="field">
               <label class="label">Generated Text Length</label>
               <div class="control">
                 <input id="length" class="input" type="text" placeholder="Text input" value="100">
               </div>
-              <p class="help">Length of the text in tokens to generate. <em>(max: 1023)</em></p>
+              <p class="help">How long do you want your story to be? <em>(max: 1023)</em></p>
             </div>
 
             <div class="field">
@@ -145,8 +145,7 @@
               <div class="control">
                 <input id="temperature" class="input" type="text" placeholder="0.7" value="0.7">
               </div>
-              <p class="help">Controls the generated text "creativity." <em>(the higher the temperature, the more
-                  creative)</em></p>
+              <p class="help">How... eccentric do you want your story to be? <em>(Higher is wackier, 0.0-1.0)</em></p>
             </div>
             <!--<div class="field">
               <label class="label">Top <em>k</em></label>
@@ -209,6 +208,8 @@
 
   $(function () {
     $('#gen-form').submit(function (e) {
+        console.log("value");
+        console.log(document.getElementById("prefix").value);
       e.preventDefault();
       $.ajax({
         type: "POST",
@@ -244,6 +245,36 @@
     });
     $('#clear-text').click(function (e) {
       $('#model-output').text('')
+    });
+
+    //THIS IS THE SEND TO SPREADSHEET CODE I GOT FROM INTERNET
+    /*var textarea = document.getElementById("prefix");
+    url = 'https://script.google.com/macros/s/AKfycbzbXIxUjkkzpoD47pLjHI77YjbjytMClK9K6K_pL1sBrdIo7VA/exec';
+
+    $('#generate-text').on('click', function(e) {
+    //e.preventDefault();
+    var jqxhr = $.ajax({
+        url: url,
+        method: "GET",
+        dataType: "json",
+        data: JSON.stringify(textarea.value),
+        success: function (data,status) {
+            console.log("SUCCESS HEWF HEWF");
+            console.log(data);
+            console.log(status);
+            }
+        })
+    })*/
+
+    //SECOND ONE I GOT OFF THE INTERNET
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbznEU1awYfGAsjv9FppLFXmx_KY4eCmbGgZVBtK_P-wy_MG8k5k/exec'
+    const form = document.forms['submit-to-google-sheet']
+
+    form.addEventListener('submit', e => {
+        e.preventDefault()
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => console.log('Success!', response))
+        .catch(error => console.error('Error!', error.message))
     });
 
     // https://stackoverflow.com/a/51478809

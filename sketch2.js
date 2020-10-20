@@ -102,10 +102,10 @@ let pressure = 0;
     console.log("hewf");
   }*/
   
-  let url = 'https://tigoe.io/itpower-data';
+  /*let url = 'https://tigoe.io/itpower-data';
   let macID = 'F8:F0:05:F5:F8:51';
   let sessionKey = '90764572';
-  let path = 'https://tigoe.io/itpower-data?macAddress=F8:F0:05:F5:F8:51&sessionKey=90764572';
+  let path = 'https://tigoe.io/itpower-data?macAddress=F8:F0:05:F5:F8:51&sessionKey=90764572';*/
   
   // make arrays to save each weather data
   
@@ -155,7 +155,7 @@ let pressure = 0;
 
     Promise.all([todayPromise,yestPromise,twoPromise,threePromise,fourPromise,fivePromise]).then((weather) => {
 
-        console.log(weather);
+        //console.log(weather);
 
         //making our wind and rain arrays
         for (let i = 1; i < weather.length-1; i++) {
@@ -186,7 +186,7 @@ let pressure = 0;
         time = (date.getUTCHours() + offset);
         time += (date.getUTCMinutes() / 60);
 
-        console.log("time before mapping, "+time);
+        //console.log("time before mapping, "+time);
 
         //get the angle and mapped windspeed
         finalAngle = map(time,0,24,2*PI,4*PI) - (3*PI)/2;
@@ -196,9 +196,9 @@ let pressure = 0;
         humid = weather[0].current.humidity;
         pressure = weather[0].current.pressure;
 
-        console.log("final wind, "+finalWind);
-        console.log("final rain, "+finalRain);
-        console.log("final angle, "+finalAngle);
+        //console.log("final wind, "+finalWind);
+        //console.log("final rain, "+finalRain);
+        //console.log("final angle, "+finalAngle);
 
         document.getElementById("rain").innerHTML = "Rain: "+(currRain * 0.039370)+" inches";
         document.getElementById("wind").innerHTML = "Wind Speed: "+(weather[0].current.wind_speed * 2.236936)+" mph";
@@ -213,18 +213,18 @@ let pressure = 0;
 
     //i might not need mapper for all of these, can i just do what i did for final angle?
     //sun: RISES AT 6 AND SETS AT 6
-    finalWind = map(windspeedmph[windspeedmph.length-1],min(windspeedmph),max(windspeedmph),0.1,5);
-    finalRain = map(rainin[rainin.length-1],min(rainin),max(rainin),0,2000);
-    recordedtime = dateConverter(recorded_at,recordedtime);
+    //finalWind = map(windspeedmph[windspeedmph.length-1],min(windspeedmph),max(windspeedmph),0.1,5);
+    //finalRain = map(rainin[rainin.length-1],min(rainin),max(rainin),0,2000);
+    //recordedtime = dateConverter(recorded_at,recordedtime);
     //finalAngle = map(recordedtime[recordedtime.length-1],min(recordedtime),max(recordedtime),0,2*PI) - (3*PI)/2;
-    finalAngle = map(recordedtime[recordedtime.length-1],min(recordedtime),max(recordedtime),2*PI,4*PI) - (3*PI)/2;
+    //finalAngle = map(recordedtime[recordedtime.length-1],min(recordedtime),max(recordedtime),2*PI,4*PI) - (3*PI)/2;
   }
 
   //------------------------------------//
   //--------------SUN-------------------//
   //------------------------------------//
   let theSun;
-  let finalAngle;
+  //let finalAngle;
 
   function Sun() {
     this.x = null;
@@ -246,7 +246,7 @@ let pressure = 0;
         this.speed = constrain(finalAngle/(pow(this.angle,5.3)),0.003,.01);
         //the problem is that for small angles even pow of this.angle won't be very high
         //so for those you'll need to... maybe pow of finalAngle-this.angle?
-        console.log(finalAngle/(pow(this.angle,5.3)));
+        //console.log(finalAngle/(pow(this.angle,5.3)));
       }
 
       this.x = (this.a*this.b) / sqrt((this.b*this.b) + ((this.a*this.a)*pow(tan(this.angle),2)));
@@ -306,7 +306,7 @@ let pressure = 0;
   //-------------RAIN-------------------//
   //------------------------------------//
   let drops = []
-  let finalRain;
+  //let finalRain;
   
   function Drop() {
     this.x = random(0, width+200);
@@ -360,7 +360,7 @@ let pressure = 0;
   //------------------------------------//
 
   let clouds = [];
-  let finalWind;
+  //let finalWind;
   
   function cloud(size,position) {
     fill(256, 150);

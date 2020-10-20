@@ -58,34 +58,6 @@ function dateConverter(array,newArray) {
     return newArray;
 }
   
-let weatha;
-let weatha2;
-let weatha3;
-let weatha4;
-let weatha5;
-let weatha6;
-
-let isLoaded = false;
-
-let weathaList = {};
-
-let windspeed = [];
-let windavg = 0;
-let rain = [];
-let rainavg = 0;
-
-let offset = -3;
-let time = 0;
-let date;
-
-let finalWind = 0;
-let finalAngle;
-let currRain;
-let finalRain = 0;
-let temp = 0;
-let humid = 0;
-let pressure = 0;
-
   /*function mapper(array,mappedArray,lower,upper,constraint = 0) {
     console.log("hewf0");
     let maxValue = max(array);
@@ -102,129 +74,88 @@ let pressure = 0;
     console.log("hewf");
   }*/
   
-  /*let url = 'https://tigoe.io/itpower-data';
+  let url = 'https://tigoe.io/itpower-data';
   let macID = 'F8:F0:05:F5:F8:51';
   let sessionKey = '90764572';
-  let path = 'https://tigoe.io/itpower-data?macAddress=F8:F0:05:F5:F8:51&sessionKey=90764572';*/
+  let path = 'https://tigoe.io/itpower-data?macAddress=F8:F0:05:F5:F8:51&sessionKey=90764572';
   
   // make arrays to save each weather data
+  let wind_dir = [];
+  
+  let winddir_avg2m = [];
+  
+  let windspeedmph = [];
+  let mappedwindspeed = [];
+  
+  let rainin = [];
+  let mappedrainin = [];
+  
+  let dailyrainin = [];
+  
+  let temperature = [];
+  let mappedtemp = []
+  
+  let humidity = [];
+  
+  let pressure = [];
+  
+  let illuminance = [];
+  let mappedillu = [];
+  
+  let uva = [];
+  let uvb = [];
+  let uvindex = [];
+  
+  let recorded_at= [];
+  let recordedtime = [];
   
   function preload() {
+    path = url + "?macAddress=" + macID + "&sessionKey=" + sessionKey;
+    //httpDo(path, 'GET', readResponse);
+    httpDo(path, 'GET', function(response) {
+        // get response as a JSON object
+    let data = JSON.parse(response);
+    
+    // parse weather data and save them into each array
+    for (i=0; i<data.length; i++) {
+      recorded_at.push(data[i].recorded_at);
+      wind_dir.push(data[i].wind_dir);
+      winddir_avg2m.push(data[i].winddir_avg2m);
+      windspeedmph.push(data[i].windspeedmph);
+      rainin.push(data[i].rainin);
+      dailyrainin.push(data[i].dailyrainin);
+      temperature.push(data[i].temperature);
+      humidity.push(data[i].humidity);
+      pressure.push(data[i].pressure);
+      illuminance.push(data[i].illuminance);
+      uva.push(data[i].uva);
+      uvb.push(data[i].uvb);
+      uvindex.push(data[i].uvindex);
+    }    
 
-    let now = Math.floor(Date.now() / 1000);
-    let lat = 40.730610;
-    let lon = -73.935242;
-    let API_KEY = "d8c3d614b10e8af43f5b0ae8ee1eeeda";
-    let urlNow =
-        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${API_KEY}&units={imperial}`;
-    let minusOne = `https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${lat}&lon=${lon}&dt=${(now - 86400)}&appid=${API_KEY}&units={imperial}`;
-    let minusTwo = `https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${lat}&lon=${lon}&dt=${(now - (86400*2))}&appid=${API_KEY}&units={imperial}`;
-    let minusThree = `https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${lat}&lon=${lon}&dt=${(now - (86400*3))}&appid=${API_KEY}&units={imperial}`;
-    let minusFour = `https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${lat}&lon=${lon}&dt=${(now - (86400*4))}&appid=${API_KEY}&units={imperial}`;
-    let minusFive = `https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${lat}&lon=${lon}&dt=${(now - (86400*5))}&appid=${API_KEY}&units={imperial}`;
+    document.getElementById("rain").innerHTML = "Rain: "+rainin[rainin.length-1]+" inches";
+    document.getElementById("time").innerHTML = "Time: "+recorded_at[recorded_at.length-1];
+    document.getElementById("wind").innerHTML = "Wind Speed: "+windspeedmph[windspeedmph.length-1]+" mph";
+    document.getElementById("temperature").innerHTML = "Temperature: "+temperature[temperature.length-1]+" C";
+    document.getElementById("humidity").innerHTML = "Humidity: "+humidity[humidity.length-1]+" %";
+    document.getElementById("pressure").innerHTML = "Pressure: "+pressure[pressure.length-1];
 
-    const todayPromise = httpGet(urlNow, 'jsonp', false, function(response) {
-        weatha = response;
-        weathaList["Today"] = weatha;
-    });
-
-    const yestPromise = httpGet(minusOne, 'jsonp', false, function(response) {
-        weatha2 = response;
-        weathaList["Yesterday"] = weatha2;
-    });
-
-    const twoPromise = httpGet(minusTwo, 'jsonp', false, function(response) {
-        weatha3 = response;
-        weathaList["Two"] = weatha3;
-    });
-
-    const threePromise = httpGet(minusThree, 'jsonp', false, function(response) {
-        weatha6 = response;
-        weathaList["Three"] = weatha6;
-    });
-
-    const fourPromise = httpGet(minusFour, 'jsonp', false, function(response) {
-        weatha4 = response;
-        weathaList["Four"] = weatha4;
-    });
-
-    const fivePromise = httpGet(minusFive, 'jsonp', false, function(response) {
-        weatha5 = response;
-        weathaList["Five"] = weatha5;
-    });
-
-    Promise.all([todayPromise,yestPromise,twoPromise,threePromise,fourPromise,fivePromise]).then((weather) => {
-
-        //console.log(weather);
-
-        //making our wind and rain arrays
-        for (let i = 1; i < weather.length-1; i++) {
-            for (let j = 0; j < weather[i].hourly.length; j++) {
-                if (weather[i].hourly[j].rain) {
-                    rain.push(weather[i].hourly[j].rain["1h"])
-                }
-                windspeed.push(weather[i].hourly[j].wind_speed);
-            }
-        }
-
-        //get the avg amount of rain
-        for (let i=0; i<rain.length; i++) {
-            rainavg += rain[i];
-        }
-        rainavg /= rain.length;
-
-        //and map the rain
-        if (weather[0].current.rain) {
-            currRain = weather[0].current.rain["1h"];
-            finalRain = map(currRain,min(rain),max(rain),0,2000);
-        } else {
-            finalRain = 0;
-            currRain = 0;
-        }
-
-        date = new Date();
-        time = (date.getUTCHours() + offset);
-        time += (date.getUTCMinutes() / 60);
-
-        //console.log("time before mapping, "+time);
-
-        //get the angle and mapped windspeed
-        finalAngle = map(time,0,24,2*PI,4*PI) - (3*PI)/2;
-        finalWind = weather[0].current.wind_speed;
-        finalWind = map(finalWind,min(windspeed),max(windspeed),0.1,5);
-        temp = (weather[0].current.temp * (9/5) - 459.67);
-        humid = weather[0].current.humidity;
-        pressure = weather[0].current.pressure;
-
-        //console.log("final wind, "+finalWind);
-        //console.log("final rain, "+finalRain);
-        //console.log("final angle, "+finalAngle);
-
-        document.getElementById("rain").innerHTML = "Rain: "+(currRain * 0.039370)+" inches";
-        document.getElementById("wind").innerHTML = "Wind Speed: "+(weather[0].current.wind_speed * 2.236936)+" mph";
-        document.getElementById("temperature").innerHTML = "Temperature: "+temp+" F";
-        document.getElementById("humidity").innerHTML = "Humidity: "+humid+" %";
-        document.getElementById("pressure").innerHTML = "Pressure: "+pressure;
-
-        isLoaded = true;
-
-
-    });
 
     //i might not need mapper for all of these, can i just do what i did for final angle?
     //sun: RISES AT 6 AND SETS AT 6
-    //finalWind = map(windspeedmph[windspeedmph.length-1],min(windspeedmph),max(windspeedmph),0.1,5);
-    //finalRain = map(rainin[rainin.length-1],min(rainin),max(rainin),0,2000);
-    //recordedtime = dateConverter(recorded_at,recordedtime);
+    finalWind = map(windspeedmph[windspeedmph.length-1],min(windspeedmph),max(windspeedmph),0.1,5);
+    finalRain = map(rainin[rainin.length-1],min(rainin),max(rainin),0,2000);
+    recordedtime = dateConverter(recorded_at,recordedtime);
     //finalAngle = map(recordedtime[recordedtime.length-1],min(recordedtime),max(recordedtime),0,2*PI) - (3*PI)/2;
-    //finalAngle = map(recordedtime[recordedtime.length-1],min(recordedtime),max(recordedtime),2*PI,4*PI) - (3*PI)/2;
+    finalAngle = map(recordedtime[recordedtime.length-1],min(recordedtime),max(recordedtime),2*PI,4*PI) - (3*PI)/2;
+    })
   }
 
   //------------------------------------//
   //--------------SUN-------------------//
   //------------------------------------//
   let theSun;
-  //let finalAngle;
+  let finalAngle;
 
   function Sun() {
     this.x = null;
@@ -246,7 +177,7 @@ let pressure = 0;
         this.speed = constrain(finalAngle/(pow(this.angle,5.3)),0.003,.01);
         //the problem is that for small angles even pow of this.angle won't be very high
         //so for those you'll need to... maybe pow of finalAngle-this.angle?
-        //console.log(finalAngle/(pow(this.angle,5.3)));
+        console.log(finalAngle/(pow(this.angle,5.3)));
       }
 
       this.x = (this.a*this.b) / sqrt((this.b*this.b) + ((this.a*this.a)*pow(tan(this.angle),2)));
@@ -306,7 +237,7 @@ let pressure = 0;
   //-------------RAIN-------------------//
   //------------------------------------//
   let drops = []
-  //let finalRain;
+  let finalRain;
   
   function Drop() {
     this.x = random(0, width+200);
@@ -360,7 +291,7 @@ let pressure = 0;
   //------------------------------------//
 
   let clouds = [];
-  //let finalWind;
+  let finalWind;
   
   function cloud(size,position) {
     fill(256, 150);
