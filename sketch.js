@@ -577,6 +577,6 @@ let pressure = 0;
     resizeCanvas(windowWidth, windowHeight);
     //mapper(windspeedmph,mappedwindspeed,0.1,5);
     //mapper(rainin,mappedrainin,0,2000);
-    finalWind = map(windspeedmph[windspeedmph.length-1],min(windspeedmph),max(windspeedmph),0.1,5);
-    finalRain = map(rainin[rainin.length-1],min(rainin),max(rainin),0,2000);
+    //finalWind = map(windspeedmph[windspeedmph.length-1],min(windspeedmph),max(windspeedmph),0.1,5);
+    //finalRain = map(rainin[rainin.length-1],min(rainin),max(rainin),0,2000);
   }

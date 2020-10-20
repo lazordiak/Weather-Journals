@@ -174,7 +174,7 @@ function dateConverter(array,newArray) {
         this.angle += this.speed;
         //this makes the speed horrendously high somehow
         //because when its negative they get divided to some insane amount
-        this.speed = constrain(finalAngle/(pow(this.angle,5.3)),0.003,.01);
+        this.speed = constrain(finalAngle/(pow(this.angle,5.3)),0.0015,.01);
         //the problem is that for small angles even pow of this.angle won't be very high
         //so for those you'll need to... maybe pow of finalAngle-this.angle?
         console.log(finalAngle/(pow(this.angle,5.3)));
