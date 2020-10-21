@@ -1,0 +1,4 @@
+05/18/2020 14:33:15 : Trained with SeaChute_Bisuness.txt
+05/18/2020 14:35:14 : Trained with Magnus_Statements.txt 
+09/29/2020 15:52:22 : Trained with text_files/Magnus_Statements.txt 
+09/29/2020 15:54:55 : Trained with text_files/SeaChute_Bisuness.txt 

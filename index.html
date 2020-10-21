@@ -21,7 +21,7 @@
     background-color: #fff;
     display: block;
     padding: 1.25rem;
-    color: #4a4a4a;
+    color:  #4a4a4a;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.25;
@@ -38,6 +38,14 @@
 
   }
 
+  .help {
+    color: #FFFCF9;
+  }
+  
+  .label {
+    color: #FFFCF9 !important
+  }
+
   .brand-text {
     display: flex;
     align-items: center;
@@ -48,6 +56,10 @@
     padding-top: 1em;
     margin-top: 1em;
     border-top: 0.5px solid #d5d5d5;
+  }
+
+  .intro {
+    color: #FFFCF9;
   }
 </style>
 
@@ -107,10 +119,11 @@
     <div class="container">
       <div class="columns is-variable is-5">
         <div class="column is-narrow" style="width: 250px;">
-          <label class="label">
+          <!--
+            <label class="label">
             Latest Weather Data
           </label>
-          <!--
+          
           <p id="temperature">
           <p>
           <p id="humidity">
@@ -126,7 +139,7 @@
         -->
           <form name="submit-to-google-sheet" id="gen-form">
             <div class="field">
-              <label class="label">Text Prompt</label>
+              <label class="label">Story Input</label>
               <div class="control">
                 <textarea id="prefix" name="Responses" class="textarea" type="text" placeholder="The weather is..." rows="5"></textarea>
               </div>
@@ -185,10 +198,47 @@
             </div>
               
               <div id="model-output" class="column">
-                  <p id="tutorial" class="subtitle"><em>Text comes out here.
-                    </em></p>
+                  <!--<p id="tutorial" class="subtitle"><em>Text comes out here.
+                    </em></p>-->
+
+                    <p class="intro">
+                      How is the weather where you are? Is it raining? Are the clouds running by or moving lazily? 
+                      Is the sun high in the sky, or is it evening, or is it night?
+                      Wherever you are, the visuals you're looking 
+                      at now are a representation of the weather in New York City at the moment you loaded the page, 
+                      and you have stumbled into 
+                      Weather Journals -- good to see you. : )
+                    </p>
+                    <br class="intro" />
+                    <p class="intro">
+                      Weather Journals is an attempt to put people in touch with their surroundings and with each other. 
+                      The whole thing is powered by OpenAI's GPT2 algorithm, which is a machine learning algorithm that generates 
+                      human-like text.
+                    </p>
+                    <br class="intro"/>
+                    <p class="intro">
+                      Here's how the whole thing works: 
+                    </p>
+                    <br class="intro"/>
+                    <p class="intro">First, we'll ask you to submit a reflection of the weather where you are in the box on the top left. This can be 
+                      whatever you want: what the clouds look like? How does the weather make you feel? Does the wind make you happy? 
+                      Does the rain sound nice? 
+                    </p>
+                    <br class="intro"/>
+                    <p class="intro">
+                      After you've put in your story, you can adjust the length and the 
+                      creativity of the story you'd like the weather to write you in return. 
+                      After you hit the button, wait a bit and you'll get your story delivered to you. 
+                    </p>
+                    <br class="intro"/>
+                    <p class="intro">
+                      At the end of the day, all the reflections that everyone put into Weather Journals for that day 
+                      are collected, and the machine learning model is trained on them. What that means is that every day into 
+                      the future, the model reflects all the reflections of all the days before it. It grows and evolves 
+                      with the weather and with our perception of the weather.
+                    </p>
         
-          </div>
+              </div>
         </div>
       </div>
 
@@ -219,16 +269,17 @@
         beforeSend: function (data) {
           $('#generate-text').addClass("is-loading");
           $('#generate-text').prop("disabled", true);
+          $('.intro').fadeOut(5000);
         },
         success: function (data) {
           $('#generate-text').removeClass("is-loading");
           $('#generate-text').prop("disabled", false);
           $('#tutorial').remove();
           var gentext = data.text;
-          if ($("#prefix").length & $("#prefix").val() != '') {
+          /*if ($("#prefix").length & $("#prefix").val() != '') {
             var pattern = new RegExp('^' + $("#prefix").val(), 'g');
             var gentext = gentext.replace(pattern, '<strong>' + $("#prefix").val() + '</strong>');
-          }
+          }*/
 
           var gentext = gentext.replace(/\n\n/g, "<div><br></div>").replace(/\n/g, "<div></div>");
           var html = '<div class=\"gen-box\">' + gentext + '</div><div class="gen-border"></div>';
