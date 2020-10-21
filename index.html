@@ -343,7 +343,7 @@
     var inputs = {};
     $("textarea, input").each(function () {
       inputs[$(this).attr('id')] = $(this).val();
-      inputs[0] = "The weather is";
+      inputs["prefix"] = "The weather";
     });
     return inputs;
   }
