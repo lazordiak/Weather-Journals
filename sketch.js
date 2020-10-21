@@ -422,6 +422,18 @@ let pressure = 0;
 
     let angleMeasure;
 
+    if (theSun.angle > finalAngle) {
+
+      const addFadeClass = elem => elem.classList.add("fadeIn3");
+
+      document.getElementById("firstInput").classList.add("fadeIn");
+      document.getElementById("secondInput").classList.add("fadeIn05");
+      document.getElementById("thirdInput").classList.add("fadeIn1");
+      document.getElementById("buttonz").classList.add("fadeIn3");
+
+      document.querySelectorAll(".intro").forEach(addFadeClass);
+    }
+
     if (theSun.angle > PI && theSun.angle < (3*PI)/2) {
       angleMeasure = (theSun.angle-PI)/(PI/2);
 

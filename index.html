@@ -81,25 +81,25 @@
 
   #firstInput {
     opacity: 0;
-    animation: fadeInAnimation ease 3s; 
+    /*animation: fadeInAnimation ease 3s; 
     animation-iteration-count: 1; 
-    animation-fill-mode: forwards; 
+    animation-fill-mode: forwards; */
   }
 
   #secondInput {
     opacity: 0;
-    animation: fadeInAnimation ease 3s; 
+    /*animation: fadeInAnimation ease 3s; 
     animation-iteration-count: 1; 
     animation-fill-mode: forwards; 
-    animation-delay: 0.5s;
+    animation-delay: 0.5s;*/
   }
 
   #thirdInput {
     opacity: 0;
-    animation: fadeInAnimation ease 3s; 
+    /*animation: fadeInAnimation ease 3s; 
     animation-iteration-count: 1; 
     animation-fill-mode: forwards; 
-    animation-delay: 1s;
+    animation-delay: 1s;*/
   }
 
   .header-descriptor {
@@ -108,24 +108,58 @@
 
   #buttonz {
     opacity: 0;
-    animation: fadeInAnimation ease 3s; 
+    /*animation: fadeInAnimation ease 3s; 
     animation-iteration-count: 1; 
     animation-fill-mode: forwards; 
-    animation-delay: 1.5s;
+    animation-delay: 1.5s;*/
   }
 
   .intro {
     opacity: 0;
     color: #FFFCF9;
-    animation: fadeInAnimation ease 3s; 
+    /*animation: fadeInAnimation ease 3s; 
     animation-iteration-count: 1; 
     animation-fill-mode: forwards; 
-    animation-delay: 3s;
+    animation-delay: 3s;*/
     max-width: 60%;
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 0.9em;
+  }
+
+  .fadeIn {
+    animation: fadeInAnimation ease 3s; 
+    animation-iteration-count: 1; 
+    animation-fill-mode: forwards; 
+  }
+
+  .fadeIn05 {
+    animation: fadeInAnimation ease 3s; 
+    animation-iteration-count: 1; 
+    animation-fill-mode: forwards; 
+    animation-delay: 0.5s;
+  }
+
+  .fadeIn1 {
+    animation: fadeInAnimation ease 3s; 
+    animation-iteration-count: 1; 
+    animation-fill-mode: forwards; 
+    animation-delay: 1s;
+  }
+
+  .fadeIn15 {
+    animation: fadeInAnimation ease 3s; 
+    animation-iteration-count: 1; 
+    animation-fill-mode: forwards; 
+    animation-delay: 1.5lanni s;
+  }
+
+  .fadeIn3 {
+    animation: fadeInAnimation ease 3s; 
+    animation-iteration-count: 1; 
+    animation-fill-mode: forwards; 
+    animation-delay: 3s;
   }
 </style>
 
@@ -268,43 +302,44 @@
               <div id="model-output" class="column">
                   <!--<p id="tutorial" class="subtitle"><em>Text comes out here.
                     </em></p>-->
-
-                    <p class="intro">
-                      How is the weather where you are? Is it raining? Are the clouds running by or moving lazily? 
-                      Is the sun high in the sky, or is it evening, or is it night?
-                      Wherever you are, the visuals you're looking 
-                      at now are a representation of the weather in New York City at the moment you loaded the page, 
-                      and you have stumbled into 
-                      Weather Journals -- good to see you. : )
-                    </p>
-                    <br class="intro" />
-                    <p class="intro">
-                      Weather Journals is an attempt to put people in touch with their surroundings and with each other. 
-                      The whole thing is powered by OpenAI's GPT2 algorithm, which is a machine learning algorithm that generates 
-                      human-like text.
-                    </p>
-                    <br class="intro"/>
-                    <p class="intro">
-                      Here's how it works: 
-                    </p>
-                    <br class="intro"/>
-                    <p class="intro">First, we'll ask you to submit a reflection of the weather where you are in the box on the top left. This can be 
-                      whatever you want: what do the clouds look like? How does the weather make you feel? Does the wind make you happy? 
-                      Does the rain sound nice? Does it remind you of another time? What was that like?
-                    </p>
-                    <br class="intro"/>
-                    <p class="intro">
-                      After you've put in your reflection, you can adjust the length and the 
-                      creativity of the story you'd like the weather to write you in return. 
-                      Then hit the button, wait a bit and you'll get your story delivered to you by the weather. 
-                    </p>
-                    <br class="intro"/>
-                    <p class="intro">
-                      At the end of the day, all the reflections that everyone put into Weather Journals for that day 
-                      are collected, and the machine learning model is trained on them. What that means is that every day into 
-                      the future, the model reflects all the reflections of all the days before it. It grows and evolves 
-                      with the weather and with our perception of the weather.
-                    </p>
+                    <div id="fadeParent" >
+                      <p class="intro">
+                        How is the weather where you are? Is it raining? Are the clouds running by or moving lazily? 
+                        Is the sun high in the sky, or is it evening, or is it night?
+                        Wherever you are, the visuals you're looking 
+                        at now are a representation of the weather in New York City at the moment you loaded the page, 
+                        and you have stumbled into 
+                        Weather Journals -- good to see you. : )
+                      </p>
+                      <br class="intro" />
+                      <p class="intro">
+                        Weather Journals is an attempt to put people in touch with their surroundings and with each other. 
+                        The whole thing is powered by OpenAI's GPT2 algorithm, which is a machine learning algorithm that generates 
+                        human-like text.
+                      </p>
+                      <br class="intro"/>
+                      <p class="intro">
+                        Here's how it works: 
+                      </p>
+                      <br class="intro"/>
+                      <p class="intro">First, we'll ask you to submit a reflection of the weather where you are in the box on the top left. This can be 
+                        whatever you want: what do the clouds look like? How does the weather make you feel? Does the wind make you happy? 
+                        Does the rain sound nice? Does it remind you of another time? What was that like?
+                      </p>
+                      <br class="intro"/>
+                      <p class="intro">
+                        After you've put in your reflection, you can adjust the length and the 
+                        creativity of the story you'd like the weather to write you in return. 
+                        Then hit the button, wait a bit and you'll get your story delivered to you by the weather. 
+                      </p>
+                      <br class="intro"/>
+                      <p class="intro">
+                        At the end of the day, all the reflections that everyone put into Weather Journals for that day 
+                        are collected, and the machine learning model is trained on them. What that means is that every day into 
+                        the future, the model reflects all the reflections of all the days before it. It grows and evolves 
+                        with the weather and with our perception of the weather.
+                      </p>
+                    </div>
         
               </div>
         </div>
@@ -337,7 +372,7 @@
         beforeSend: function (data) {
           $('#generate-text').addClass("is-loading");
           $('#generate-text').prop("disabled", true);
-          $('.intro').fadeOut(5000);
+          $('#fadeParent').fadeOut(5000);
         },
         success: function (data) {
           $('#generate-text').removeClass("is-loading");
