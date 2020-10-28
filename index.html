@@ -5,7 +5,8 @@
   body {
     height: 95% !important;
     margin: 0 !important;
-    overflow: hidden !important; /* Hide scrollbars */
+    overflow: hidden !important;
+    /* Hide scrollbars */
   }
 
   footer {
@@ -13,24 +14,25 @@
     padding: 1em !important
   }
 
-  @keyframes fadeInAnimation { 
-    0% { 
-        opacity: 0; 
-    } 
-    100% { 
-        opacity: 1; 
-     } 
-  } 
+  @keyframes fadeInAnimation {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
 
   section {
-    min-height: 95% !important
+    height: 100% !important
   }
 
   .gen-box {
     background-color: #fff;
     display: block;
     padding: 1.25rem;
-    color:  #4a4a4a;
+    color: #4a4a4a;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.25;
@@ -53,14 +55,14 @@
     font-weight: 400;
     font-family: 'Open Sans', sans-serif;
   }
-  
+
   .label {
     color: #FFFCF9 !important;
     font-family: 'Monospace', sans-serif;
     font-style: normal;
     font-weight: 600;
   }
-  
+
   .heado {
     font-family: 'Josefin Slab', serif !important;
     font-style: normal !important;
@@ -116,12 +118,13 @@
 
   .intro {
     opacity: 0;
-    color: #FFFCF9;
+    color:#d5d5d5;
+    /*color: #FFFCF9;*/
     /*animation: fadeInAnimation ease 3s; 
     animation-iteration-count: 1; 
     animation-fill-mode: forwards; 
     animation-delay: 3s;*/
-    max-width: 60%;
+    /*max-width: 60%;*/
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -129,37 +132,44 @@
   }
 
   .fadeIn {
-    animation: fadeInAnimation ease 3s; 
-    animation-iteration-count: 1; 
-    animation-fill-mode: forwards; 
+    animation: fadeInAnimation ease 3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
   }
 
   .fadeIn05 {
-    animation: fadeInAnimation ease 3s; 
-    animation-iteration-count: 1; 
-    animation-fill-mode: forwards; 
+    animation: fadeInAnimation ease 3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
     animation-delay: 0.5s;
   }
 
   .fadeIn1 {
-    animation: fadeInAnimation ease 3s; 
-    animation-iteration-count: 1; 
-    animation-fill-mode: forwards; 
+    animation: fadeInAnimation ease 3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
     animation-delay: 1s;
   }
 
   .fadeIn15 {
-    animation: fadeInAnimation ease 3s; 
-    animation-iteration-count: 1; 
-    animation-fill-mode: forwards; 
+    animation: fadeInAnimation ease 3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
     animation-delay: 1.5lanni s;
   }
 
   .fadeIn3 {
-    animation: fadeInAnimation ease 3s; 
-    animation-iteration-count: 1; 
-    animation-fill-mode: forwards; 
+    animation: fadeInAnimation ease 3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
     animation-delay: 3s;
+  }
+
+  #container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
   }
 </style>
 
@@ -215,13 +225,13 @@
 </nav>
 
 <body>
-  <script src="sketch.js"></script>
+  <script src="weatherCentered.js"></script>
   <section id="main" class="section">
 
-    <div class="container">
-      <div class="columns is-variable is-5">
-        <div class="column is-narrow" style="width: 250px;">
-          <!--
+    <div id="container">
+
+      <div class="hewf" style="width: 20%;">
+        <!--
             <label class="label">
             Latest Weather Data
           </label>
@@ -239,30 +249,33 @@
           <p id="time">
           </p>
         -->
-          <form name="submit-to-google-sheet" id="gen-form">
-            <div id="firstInput" class="field">
-              <label class="label">Story Input</label>
-              <div class="control">
-                <textarea id="prefix" name="Responses" class="textarea" type="text" placeholder="The weather is..." rows="5"></textarea>
-              </div>
-              <p class="help">Tell us a reflection on how the current weather makes you feel. <em>(~50-100 words is best)</em></p>
+        <form name="submit-to-google-sheet" id="gen-form">
+          <div id="firstInput" class="field">
+            <label class="label">Story Input</label>
+            <div class="control">
+              <textarea id="prefix" name="Responses" class="textarea" type="text" placeholder="The weather is..."
+                rows="5"></textarea>
             </div>
-            <div id="secondInput" class="field">
-              <label class="label">Generated Text Length</label>
-              <div class="control">
-                <input id="length" class="input" type="text" placeholder="Text input" value="100">
-              </div>
-              <p class="help">How long do you want your story to be? <em>(max: 1023)</em></p>
+            <p class="help">Tell us a reflection on how the current weather makes you feel. <em>(~50-100 words is
+                best)</em></p>
+          </div>
+          <div id="secondInput" class="field">
+            <label class="label">Generated Text Length</label>
+            <div class="control">
+              <input id="length" class="input" type="text" placeholder="Text input" value="100">
             </div>
+            <p class="help">How long do you want your story to be? <em>(max: 1023)</em></p>
+          </div>
 
-            <div id="thirdInput" class="field">
-              <label class="label">Creativity</label>
-              <div class="control">
-                <input id="temperature" class="input" type="text" placeholder="0.7" value="0.7">
-              </div>
-              <p class="help">How... eccentric do you want your story to be? <em>(Higher is wackier, 0.0-1.0, 0.7 is a good default)</em></p>
+          <div id="thirdInput" class="field">
+            <label class="label">Creativity</label>
+            <div class="control">
+              <input id="temperature" class="input" type="text" placeholder="0.7" value="0.7">
             </div>
-            <!--<div class="field">
+            <p class="help">How... eccentric do you want your story to be? <em>(Higher is wackier, 0.0-1.0, 0.7 is a
+                good default)</em></p>
+          </div>
+          <!--<div class="field">
               <label class="label">Top <em>k</em></label>
               <div class="control">
                 <input id="top_k" class="input" type="text" placeholder="40" value="40">
@@ -271,17 +284,17 @@
                   disable)</em></p>
             </div>
           -->
-            <div id="buttonz" class="buttons">
-              <span class="control">
-                <button type="submit" name="submit" id="generate-text" class="button is-link">
-                  <span class="icon">
-                    <i class="fas fa-md fa-pen"></i>
-                  </span><span>Generate Text!</span></button>
-              </span>
+          <div id="buttonz" class="buttons">
+            <span class="control">
+              <button type="submit" name="submit" id="generate-text" class="button is-link">
+                <span class="icon">
+                  <i class="fas fa-md fa-pen"></i>
+                </span><span>Generate Text!</span></button>
+            </span>
 
-            </div>
-          </form>
-          <!--
+          </div>
+        </form>
+        <!--
           <div id="extra-buttons" class="buttons">
             <span class="control">
               <button id="save-image" class="button is-success">
@@ -297,53 +310,47 @@
               
               </div> 
             -->
-            </div>
-              
-              <div id="model-output" class="column">
-                  <!--<p id="tutorial" class="subtitle"><em>Text comes out here.
+      </div>
+
+      <div id="sketchHolder" style="width: 55%; height: 100%;">
+
+      </div>
+
+      <div class="hewf" style="width: 25%;">
+
+        <div id="model-output" class="column">
+          <!--<p id="tutorial" class="subtitle"><em>Text comes out here.
                     </em></p>-->
-                    <div id="fadeParent" >
-                      <p class="intro">
-                        How is the weather where you are? Is it raining? Are the clouds running by or moving lazily? 
-                        Is the sun high in the sky, or is it evening, or is it night?
-                        Wherever you are, the visuals you're looking 
-                        at now are a representation of the weather in New York City at the moment you loaded the page, 
-                        and you have stumbled into 
-                        Weather Journals -- good to see you. : )
-                      </p>
-                      <br class="intro" />
-                      <p class="intro">
-                        Weather Journals is an attempt to put people in touch with their surroundings and with each other. 
-                        The whole thing is powered by OpenAI's GPT2 algorithm, which is a machine learning algorithm that generates 
-                        human-like text.
-                      </p>
-                      <br class="intro"/>
-                      <p class="intro">
-                        Here's how it works: 
-                      </p>
-                      <br class="intro"/>
-                      <p class="intro">First, we'll ask you to submit a reflection of the weather where you are in the box on the top left. This can be 
-                        whatever you want: what do the clouds look like? How does the weather make you feel? Does the wind make you happy? 
-                        Does the rain sound nice? Does it remind you of another time? What was that like?
-                      </p>
-                      <br class="intro"/>
-                      <p class="intro">
-                        After you've put in your reflection, you can adjust the length and the 
-                        creativity of the story you'd like the weather to write you in return. 
-                        Then hit the button, wait a bit and you'll get your story delivered to you by the weather. 
-                      </p>
-                      <br class="intro"/>
-                      <p class="intro">
-                        At the end of the day, all the reflections that everyone put into Weather Journals for that day 
-                        are collected, and the machine learning model is trained on them. What that means is that every day into 
-                        the future, the model reflects all the reflections of all the days before it. It grows and evolves 
-                        with the weather and with our perception of the weather.
-                      </p>
-                    </div>
-        
-              </div>
+          <div style="overflow:auto;" id="fadeParent">
+            <p class="intro">
+              Hello, and welcome to Weather Journals! Weather Journals is an attempt to put people in touch with their surroundings and with each other.
+              The whole thing is powered by OpenAI's GPT2 algorithm, which is a machine learning algorithm that
+              generates
+              human-like text.
+            </p>
+            <br class="intro" />
+            <p class="intro">First, submit a reflection of the weather where you are in the box on
+              the top left. This can be
+              whatever you want: what do the clouds look like? How does the weather make you feel? Does it remind you of another time?
+            </p>
+            <br class="intro" />
+            <p class="intro">
+              After you've put in your reflection, adjust the length and the
+              creativity of the text you'd like the weather to write you in return.
+              Then hit the button and wait.
+            </p>
+            <br class="intro" />
+            <p class="intro">
+              At the end of the day, everything that everyone has written for that day
+              is used to train the machine learning model. What that means is that every day into
+              the future, the model reflects all the reflections of all the days before it, growing and evolving with 
+              the weather.
+            </p>
+          </div>
+
         </div>
       </div>
+    </div>
 
 
   </section>
@@ -352,17 +359,16 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
-  </script>
+</script>
 
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js">
 </script>
 
 <script type="text/javascript">
-
   $(function () {
     $('#gen-form').submit(function (e) {
-        console.log("value");
-        console.log(document.getElementById("prefix").value);
+      console.log("value");
+      console.log(document.getElementById("prefix").value);
       e.preventDefault();
       $.ajax({
         type: "POST",
@@ -392,7 +398,8 @@
           $('#generate-text').removeClass("is-loading");
           $('#generate-text').prop("disabled", false);
           $('#tutorial').remove();
-          var html = '<div class="gen-box warning">There was an error generating the text! Please try again!</div><div class="gen-border"></div>';
+          var html =
+            '<div class="gen-box warning">There was an error generating the text! Please try again!</div><div class="gen-border"></div>';
           $(html).appendTo('#model-output').hide().fadeIn("slow");
         }
       });
@@ -421,12 +428,16 @@
     })*/
 
     //SECOND ONE I GOT OFF THE INTERNET
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbznEU1awYfGAsjv9FppLFXmx_KY4eCmbGgZVBtK_P-wy_MG8k5k/exec'
+    const scriptURL =
+      'https://script.google.com/macros/s/AKfycbznEU1awYfGAsjv9FppLFXmx_KY4eCmbGgZVBtK_P-wy_MG8k5k/exec'
     const form = document.forms['submit-to-google-sheet']
 
     form.addEventListener('submit', e => {
-        e.preventDefault()
-        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      e.preventDefault()
+      fetch(scriptURL, {
+          method: 'POST',
+          body: new FormData(form)
+        })
         .then(response => console.log('Success!', response))
         .catch(error => console.error('Error!', error.message))
     });
@@ -476,8 +487,6 @@
 
     }
   }
-
-
 </script>
 
 </html>

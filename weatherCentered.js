@@ -480,11 +480,11 @@ let pressure = 0;
     }
     background(bgColor);
     
-    let tx1 = -100;
+    let tx1 = width/4;
     let ty1 = height;
-    let tx2 = width/2+tx1;
+    let tx2 = width/4+tx1;
     let ty2 = height/4;
-    let tx3 = width/2+tx2;
+    let tx3 = width/4+tx2;
     let ty3 = height;
 
     theMoon.newAngleMove(bgColor);
@@ -498,7 +498,7 @@ let pressure = 0;
     theSun.newAngleMove();
     
     //background triangle 1
-    let bt1x2 = width/5;
+    let bt1x2 = width/2.5;
     let bt1x1 = bt1x2 - width/6;
     let bt1x3 = bt1x2 + width/8;
     //side 1
@@ -509,7 +509,7 @@ let pressure = 0;
     triangle(bt1x1, ty1, bt1x2, height/3, bt1x3-(bt1x3-bt1x1)/3, ty3);
     
     //background triangle 2 
-    let bt2x2 = bt1x2/2;
+    let bt2x2 = bt1x2/1.2;
     let bt2x1 = bt2x2 - width/4;
     let bt2x3 = bt2x2 + width/6;
     //side 1
@@ -522,10 +522,10 @@ let pressure = 0;
     //first triangle
     //side 1
     fill(TColor2);
-    triangle(tx1, ty1, tx2, ty2, tx3, ty3);
+    triangle(tx1, ty1, tx2+(width/20), ty2, tx3+(width/8), ty3);
     //side 2
     fill(TColor1);
-    triangle(tx1, ty1, tx2, ty2, tx3-((tx3-tx1)/1.5), ty3);
+    triangle(tx1, ty1, tx2+(width/20), ty2, tx3-((tx3-tx1)/1.5), ty3);
     
     //rain 
     if (finalRain > 0) {
