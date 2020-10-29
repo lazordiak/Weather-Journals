@@ -530,7 +530,7 @@ let pressure = 0;
     //rain 
     if (finalRain > 0) {
       if (!(drops.length > 0)) {
-        for(let i = 0; i < finalRain*5; i++) {
+        for(let i = 0; i < finalRain; i++) {
           drops[i] = new Drop();
         }
       }

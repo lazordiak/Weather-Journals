@@ -176,7 +176,7 @@ let pressure = 0;
         //and map the rain
         if (weather[0].current.rain) {
             currRain = weather[0].current.rain["1h"];
-            finalRain = map(currRain,min(rain),max(rain),0,2000);
+            finalRain = map(currRain,min(rain),max(rain),0,500);
         } else {
             finalRain = 0;
             currRain = 0;
@@ -530,7 +530,7 @@ let pressure = 0;
     //rain 
     if (finalRain > 0) {
       if (!(drops.length > 0)) {
-        for(let i = 0; i < finalRain*5; i++) {
+        for(let i = 0; i < finalRain; i++) {
           drops[i] = new Drop();
         }
       }
