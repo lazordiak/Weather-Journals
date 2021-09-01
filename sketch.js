@@ -7,7 +7,6 @@ let windavg = 0;
 let rain = [];
 let rainavg = 0;
 
-let offset = -3;
 let time = 0;
 let date;
 
@@ -85,7 +84,7 @@ function preload() {
         }
 
         date = new Date();
-        time = (date.getUTCHours() + offset);
+        time = (date.getUTCHours() - 3);
         time += (date.getUTCMinutes() / 60);
 
         //console.log("time before mapping, "+time);
