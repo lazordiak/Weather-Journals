@@ -87,8 +87,6 @@ function preload() {
         time = (date.getUTCHours() - 3);
         time += (date.getUTCMinutes() / 60);
 
-        //console.log("time before mapping, "+time);
-
         //get the angle and mapped windspeed
         finalAngle = map(time, 0, 24, 2 * PI, 4 * PI) - (3.2 * PI) / 2;
         finalWind = weather[0].current.wind_speed;
@@ -96,10 +94,6 @@ function preload() {
         temp = (weather[0].current.temp * (9 / 5) - 459.67);
         humid = weather[0].current.humidity;
         pressure = weather[0].current.pressure;
-
-        //console.log("final wind, "+finalWind);
-        //console.log("final rain, "+finalRain);
-        //console.log("final angle, "+finalAngle);
 
         document.getElementById("rain").innerHTML = "Rain: " + (currRain * 0.039370) + " inches";
         document.getElementById("wind").innerHTML = "Wind Speed: " + (weather[0].current.wind_speed * 2.236936) + " mph";
