@@ -1,19 +1,5 @@
 let canvas;
 
-function dateConverter(array,newArray) {
-    for (let i = 0; i<array.length; i++) {
-      let date = new Date(array[i]);
-      let minutes = date.getMinutes();
-      if (minutes < 10) {
-        minutes = `.0${minutes}`; 
-      } else {
-        minutes = `.${minutes}`;
-      }
-      newArray[i] = Number(`${date.getHours()-4}`+minutes);
-      }    
-    return newArray;
-}
-
 let weathaList = {};
 
 let windspeed = [];
